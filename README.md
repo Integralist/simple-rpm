@@ -10,13 +10,15 @@ This repository demonstrates how to build a simple RPM (with the help of Docker)
 
 `docker run integralist/simplerpm`
 
-> Save changes inside container: `docker commit <running_container_id> integralist/simplerpm:<tag>`
+> Save changes inside container:  
+> `docker commit <running_container_id> integralist/simplerpm:<tag>`
 
 ## Generate RPM
 
 `rpmbuild -bb -v integralist-0.0.1-1.spec`
 
-> RPM filename convention: `<package_name>-<version_number>-<release_number>.spec`
+> RPM filename convention:  
+> `<package_name>-<version_number>-<release_number>.spec`
 
 ## Other Commands
 
