@@ -8,7 +8,7 @@ This repository demonstrates how to build a simple RPM (with the help of Docker)
 
 ## Run Docker Container
 
-`docker run integralist/simplerpm`
+`docker run -it integralist/simplerpm bash`
 
 > Save changes inside container:  
 > `docker commit <running_container_id> integralist/simplerpm:<tag>`
