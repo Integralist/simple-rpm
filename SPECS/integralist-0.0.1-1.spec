@@ -26,34 +26,51 @@ The %{buildroot} and $RPM_BUILD_ROOT are always the directory /root/rpmbuild/BUI
 make tester -f ../Makefile
 
 %pre
-# This is a macro that is supposed to run before the install section
+# This is a macro that is supposed to run before the 'install' step
 # But seemingly never does?
 
 %install
-# You install your software into the temporary "Build Root"
-# There's an automated check for the directory: /root/rpmbuild/BUILDROOT/integralist-0.0.1-1.x86_64
-# If the directory exists, then remove it and recreate it (so you have an empty folder)
+# You install your software into the temporary "BUILDROOT" directory
+# /root/rpmbuild/BUILDROOT/integralist-0.0.1-1.x86_64
+# So for us, "installing" is simply copying the relevant files into the "BUILDROOT" directory
 cp %{SOURCE0} %{buildroot}/$(basename %{SOURCE0})
 cp ./generated-appfile %{buildroot}/generated-appfile
 
+# Note:
+# The install step has an automated check for the "BUILDROOT" directory
+# You can see this when using the -v flag for verbose output
+# Effectively it checks to see if the directory exists and then removes/recreates it
+# This leaves you with an empty folder to "install" your files into (as demonstrated above)
+
 %post
-echo "POST"
-# This is a macro that runs after the install section
-pwd
-ls
+# This is a macro that runs after the 'install' step
 
 %clean
+# This is a macro that runs after the 'post' step
 rm ./generated-appfile
 
 %files
-# "This section is mandatory: it states the files that should be included in the binary package"
-# "Listed below (in the spec file that is) are the files we'll add to the binary package"
+# The 'files' step is mandatory: it states which files should be included in the binary package
+# Listed below are the files we'll add to the binary package
+# They need to be absolute paths and interestingly seems to be 'scoped' to the "buildroot" directory
 /testapp
 /generated-appfile
 
-# Although the files section is after the install step,
-# the install step uses this to confirm its content matches
+# Although the 'files' step is after the 'install' step,
+# the 'install' step uses 'files' to confirm the content matches
+# If they don't match (e.g. you don't "install" testapp or generated-appfile) then the build will fail
+
+# Note:
+# There are other directives you can use under 'files' which are things like:
+# %attr(<mode>, <user>, <group>) file
+# %defattr(<file mode>, <user>, <group>, <dir mode>)
+# %ghost file
+# %verify
+# For full details see: http://www.rpm.org/max-rpm-snapshot/s1-rpm-inside-files-list-directives.html
 
 %changelog
+* Fri Jul 17 2015 Mark McDonnell <mark.mcdx@gmail.com>
+- Cleaned up the descriptions in the spec file
+
 * Thu Jul 16 2015 Mark McDonnell <mark.mcdx@gmail.com>
 - Initial setup of spec file to test building an RPM
