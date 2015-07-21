@@ -8,11 +8,11 @@ This repository demonstrates how to build a simple RPM (with the help of Docker)
 
 ## Run Docker Container
 
-`docker run -v $(pwd):/rpmbuild integralist/simplerpm`
+`docker run -v $(pwd):/root/rpmbuild integralist/simplerpm`
 
 If you want to debug the running container:
 
-> `docker run -v $(pwd):/rpmbuild -it --entrypoint=/bin/bash integralist/simplerpm`
+> `docker run -v $(pwd):/root/rpmbuild -it --entrypoint=/bin/bash integralist/simplerpm`
 
 If you want to save changes inside container:  
 
