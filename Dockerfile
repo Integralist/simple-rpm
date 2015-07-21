@@ -1,5 +1,5 @@
 FROM fedora:latest
 RUN yum -y install tree man man-pages make gcc rpm-build
-WORKDIR $HOME
-ADD . rpmbuild/
-RUN mv /rpmbuild $HOME/rpmbuild
+WORKDIR $HOME/rpmbuild
+ENTRYPOINT ["rpmbuild"]
+CMD ["-bb", "-v", "SPECS/*.spec"]
