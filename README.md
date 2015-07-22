@@ -8,7 +8,7 @@ This repository demonstrates how to build a simple RPM (with the help of Docker)
 
 ## Run Docker Container
 
-`docker run -v $(pwd):/root/rpmbuild integralist/simplerpm SPECS/integralist-0.0.1-1.spec`
+`docker run -v $(pwd):/root/rpmbuild integralist/simplerpm SPECS/*.spec`
 
 If you want to debug the running container:
 
