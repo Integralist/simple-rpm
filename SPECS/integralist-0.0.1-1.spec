@@ -20,6 +20,7 @@ The %{buildroot} and $RPM_BUILD_ROOT are always the directory /root/rpmbuild/BUI
 # The prep section has two macros available: setup and patch (both prefixed with a percentage sign)
 # The macros have their own flags/options and execute commands based on a directory/file convention
 # You don't need to use prep in order to use setup or patch; they're added as two separate sections
+# For more info as to how they work, read: http://www.rpm.org/max-rpm/s1-rpm-inside-macros.html
 
 %build
 # Compile any files/binaries needed to be added to your RPM (added via the install section)
